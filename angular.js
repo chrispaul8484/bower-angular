@@ -9382,7 +9382,10 @@ function $HttpProvider() {
 
 
     function buildUrl(url, params) {
-          if (!params) return url;
+
+        url = url.replace(/%2F/g, '*slash*');
+
+        if (!params) return url;
           var parts = [];
           forEachSorted(params, function(value, key) {
             if (value == null || value == undefined) return;
