@@ -9383,7 +9383,13 @@ function $HttpProvider() {
 
     function buildUrl(url, params) {
 
-        url = url.replace(/%2F/g, '*slash*');
+        var qsIndx = url.indexOf('?');
+        if (qsIndx >=0) {
+            var qs = url.substring(qsIndx);
+            url = url.substring(0, qsIndx).replace(/%2F/g, '*slash*') + qs;
+        } else {
+            url = url.replace(/%2F/g, '*slash*');
+        }
 
         if (!params) return url;
           var parts = [];
